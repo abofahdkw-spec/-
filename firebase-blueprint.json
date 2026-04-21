@@ -1,0 +1,97 @@
+{
+  "entities": {
+    "users": {
+      "title": "User Profile",
+      "description": "Stores teacher profile information and settings.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "settings": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "classes": {
+      "title": "Class",
+      "description": "Represents a school class or group of students.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "teacherUid": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "teacherUid"]
+    },
+    "students": {
+      "title": "Student",
+      "description": "Represents a student in a class.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "classId": { "type": "string" },
+        "teacherUid": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "classId", "teacherUid"]
+    },
+    "sessions": {
+      "title": "Session",
+      "description": "Represents a teaching session or lesson.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "date": { "type": "string" },
+        "classId": { "type": "string" },
+        "teacherUid": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "date", "classId", "teacherUid"]
+    },
+    "attendance": {
+      "title": "Attendance Record",
+      "description": "Stores attendance and participation for a student in a session.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "sessionId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "status": { "type": "string", "enum": ["Present", "Absent", "Late"] },
+        "participation": { "type": "number" },
+        "teacherUid": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["sessionId", "studentId", "status", "teacherUid"]
+    },
+    "evidence": {
+      "title": "Evidence",
+      "description": "Stores professional evidence and achievements.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "date": { "type": "string" },
+        "fileUrl": { "type": "string" },
+        "fileName": { "type": "string" },
+        "teacherUid": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "category", "date", "teacherUid"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "users", "description": "User profile documents" },
+    "/classes/{classId}": { "schema": "classes", "description": "Class documents" },
+    "/students/{studentId}": { "schema": "students", "description": "Student documents" },
+    "/sessions/{sessionId}": { "schema": "sessions", "description": "Session documents" },
+    "/attendance/{attendanceId}": { "schema": "attendance", "description": "Attendance records" },
+    "/evidence/{evidenceId}": { "schema": "evidence", "description": "Evidence documents" }
+  }
+}

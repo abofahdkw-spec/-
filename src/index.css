@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-apple-blue: #007AFF;
+  --color-apple-gray: #8E8E93;
+  --color-apple-bg: #F8F8FA;
+  --color-apple-dark-bg: #000000;
+  --color-apple-card: #FFFFFF;
+  --color-apple-dark-card: #1C1C1E;
+}
+
+@layer base {
+  html {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv11", "kern";
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans antialiased bg-apple-bg text-slate-900;
+    letter-spacing: -0.011em;
+  }
+  .dark body {
+    @apply bg-black text-white;
+  }
+
+  /* Custom Scrollbar - iPad Style */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300/50 rounded-full;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full;
+  }
+}
+
+/* iPadOS Vibrancy/Glassmorphism */
+.vibrancy-light {
+  @apply bg-white/80 backdrop-blur-2xl border-b border-black/5;
+}
+.dark .vibrancy-dark {
+  @apply bg-[#1c1c1e]/80 backdrop-blur-2xl border-b border-white/5;
+}
+
+.sidebar-vibrancy {
+  @apply bg-[#F2F2F7]/80 backdrop-blur-3xl border-r border-black/5;
+}
+.dark .sidebar-vibrancy {
+  @apply bg-black/60 backdrop-blur-3xl border-r border-white/5;
+}
+
+/* Apple-style Squircles */
+.squircle-sm { @apply rounded-xl; }
+.squircle-md { @apply rounded-2xl; }
+.squircle-lg { @apply rounded-[2rem]; }
+.squircle-xl { @apply rounded-[2.5rem]; }
+
+/* Apple Buttons */
+.apple-btn-primary {
+  @apply bg-apple-blue text-white font-semibold rounded-xl px-4 py-2 active:opacity-70 transition-opacity;
+}
+.apple-btn-secondary {
+  @apply bg-slate-200 text-apple-blue font-semibold rounded-xl px-4 py-2 active:opacity-70 transition-opacity;
+}
+.dark .apple-btn-secondary {
+  @apply bg-white/10 text-apple-blue font-semibold rounded-xl px-4 py-2 active:opacity-70 transition-opacity;
+}
+
+@media print {
+  .no-print, [no-print] { display: none !important; }
+  aside, nav, .sidebar-vibrancy, .mobile-nav { display: none !important; }
+  body { 
+    background: white !important; 
+    color: black !important; 
+    font-family: "IBM Plex Sans Arabic", "Inter", sans-serif !important; 
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .print-only { display: block !important; }
+  main { margin: 0 !important; padding: 0 !important; width: 100% !important; overflow: visible !important; }
+  
+  /* Modern Template */
+  .template-modern {
+    padding: 40px;
+    background: white;
+  }
+  .template-modern .header {
+    border-bottom: 3px solid #007AFF;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+  }
+
+  /* Classic Template */
+  .template-classic {
+    padding: 40px;
+    font-family: serif !important;
+  }
+  .template-classic .header {
+    border: 2px solid #000;
+    margin-bottom: 30px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  /* Professional Template */
+  .template-professional {
+    padding: 40px;
+    background: #fdfdfd;
+  }
+  .template-professional .header {
+    background: #111;
+    color: white;
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+
+  /* Colorful Template */
+  .template-colorful {
+    padding: 40px;
+  }
+  .template-colorful .header {
+    background: linear-gradient(to right, #007AFF, #FF2D55);
+    color: white;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+  }
+  
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  th, td { border: 1px solid #ddd; padding: 12px; text-align: right; font-size: 11px; }
+  th { background-color: #f9f9f9; font-weight: bold; }
+}
+
+.print-only { display: none; }
